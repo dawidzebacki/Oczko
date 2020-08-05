@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>Oczko</title>
+  </head>
+  <body>
+    <script type="text/javascript" src="app.js"></script>
+    <div class="main">
+      <div id="rules">
+        <h1>"Oczko" - polish version of blackjack</h1>
+        <p>Rules are very simple:</p>
+        <p>Try to be most accurate and pick 21 points from cards.</p>
+        <p>You can press HIT and take one more card.</p>
+        <p>
+          You can press STAND and after other players turns check who is the
+          most accurate.
+        </p>
+        <p>If you would have more than 21 points you lost.</p>
+        <p>Exception is if you'll have two aces on the beginning.</p>
+        <p>
+          Points of card are numbers visible on the card or J:2, Q:3, K:4, A:11.
+        </p>
+        <p>
+          If you are playing single-player the dealer will HIT if his points is
+          under 17. Otherwise the dealer will STAND
+        </p>
+      </div>
+
+      <p class="no-visibility" id="now_playing"></p>
+
+      <div class="menu" id="menu">
+        <a class="horizontal" type="button" onclick="startSingle()">
+          <span class="text">Single-player</span>
+        </a>
+        <a class="horizontal" type="button" onclick="showMenuMultiplayer()">
+          <span class="text">Multiplayer</span>
+        </a>
+      </div>
+
+      <div class="menu no-visibility" id="menu_multiplayer">
+        <div class="multi">
+          <label for="numberOfColumns">How many players?</label>
+          <input
+            onkeyup="this.value = inputMinMax(this.value, 2, 6)"
+            class="form-control"
+            value="2"
+            id="number_of_players"
+          />
+        </div>
+
+        <button
+          class="horizontal"
+          type="button"
+          id="start"
+          onclick="startMulti()"
+        >
+          <span class="text">PLAY</span>
+        </button>
+      </div>
+
+      <div class="no-visibility" id="hint_hand_dealer">
+        Dealer's hand is underneath
+      </div>
+      <div class="cards-container no-visibility" id="cards_container_ai"></div>
+      <div class="cards-container no-visibility" id="cards_container"></div>
+      <div class="no-visibility" id="hint_hand_player">Your hand is above</div>
+
+      <div class="statements no-visibility" id="statements_container">
+        <h1>Points</h1>
+        <h1 id="points-number">0</h1>
+      </div>
+
+      <div class="buttons no-visibility" id="buttons_container">
+        <button
+          id="hit_button"
+          class="horizontal"
+          type="button"
+          onclick="hit(1)"
+        >
+          <span class="text">HIT</span>
+        </button>
+        <button
+          id="stand_button"
+          class="horizontal"
+          type="button"
+          onclick="stand()"
+        >
+          <span class="text">STAND</span>
+        </button>
+      </div>
+
+      <div class="final-statement no-visibility" id="final_statement">
+        <h1 class="no-visibility" id="game_statement"></h1>
+        <button
+          id="reset_button"
+          class="horizontal no-visibility"
+          type="button"
+          onclick="reset()"
+        >
+          <span class="text">RESET</span>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
