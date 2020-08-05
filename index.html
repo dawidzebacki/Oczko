@@ -12,50 +12,45 @@
       <div id="rules">
         <h1>"Oczko" - polish version of blackjack</h1>
         <p>Rules are very simple:</p>
-        <p>Try to be most accurate and pick 21 points from cards.</p>
-        <p>You can press HIT and take one more card.</p>
+        <p>Try to be most accurate and pick <span class="special-word">21</span> points from cards.</p>
+        <p>You can press <span class="special-word">HIT</span> and take one more card.</p>
         <p>
-          You can press STAND and after other players turns check who is the
+          You can press <span class="special-word">STAND</span> and after other players turns check who is the
           most accurate.
         </p>
-        <p>If you would have more than 21 points you lost.</p>
-        <p>Exception is if you'll have two aces on the beginning.</p>
+        <p>If you would have more than <span class="special-word">21</span> points you lost.</p>
+        <p>Exception is if you'll have two aces on the beginning. Then you win.</p>
         <p>
-          Points of card are numbers visible on the card or J:2, Q:3, K:4, A:11.
+          Points of card are numbers visible on the card or <span class="special-word">J:2, Q:3, K:4, A:11</span>.
         </p>
         <p>
-          If you are playing single-player the dealer will HIT if his points is
-          under 17. Otherwise the dealer will STAND
+          If you are playing single-player the dealer will <span class="special-word">HIT</span> if his points is
+          under <span class="special-word">17</span> Otherwise the dealer will <span class="special-word">STAND</span>.
         </p>
       </div>
 
       <p class="no-visibility" id="now_playing"></p>
 
       <div class="menu" id="menu">
-        <a class="horizontal" type="button" onclick="startSingle()">
-          <span class="text">Single-player</span>
+        <a class="horizontal" type="button" onclick="startSingleplayer()">
+          <span class="text">SINGLE-PLAYER</span>
         </a>
         <a class="horizontal" type="button" onclick="showMenuMultiplayer()">
-          <span class="text">Multiplayer</span>
+          <span class="text">MULTIPLAYER</span>
         </a>
       </div>
 
       <div class="menu no-visibility" id="menu_multiplayer">
-        <div class="multi">
-          <label for="numberOfColumns">How many players?</label>
-          <input
-            onkeyup="this.value = inputMinMax(this.value, 2, 6)"
-            class="form-control"
-            value="2"
-            id="number_of_players"
-          />
+        <div class="multiplayer-menu">
+          <label for>Type how many players if there is more than 2.</label>
+          <input id="number_of_players" />
         </div>
 
         <button
           class="horizontal"
           type="button"
           id="start"
-          onclick="startMulti()"
+          onclick="startMultiplayer()"
         >
           <span class="text">PLAY</span>
         </button>
@@ -82,6 +77,7 @@
         >
           <span class="text">HIT</span>
         </button>
+
         <button
           id="stand_button"
           class="horizontal"
@@ -94,6 +90,7 @@
 
       <div class="final-statement no-visibility" id="final_statement">
         <h1 class="no-visibility" id="game_statement"></h1>
+
         <button
           id="reset_button"
           class="horizontal no-visibility"

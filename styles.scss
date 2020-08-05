@@ -1,12 +1,13 @@
 :root {
   --base-color: rgba(255, 255, 255, 1);
-  --hover-color: rgba(4, 147, 114, 1);
+  --hover-color: #606c88;
 }
 
 body {
-  font-family: "Anton", sans-serif;
-  background: rgba(4, 147, 114, 1);
-  background: linear-gradient(90deg, rgba(4, 147, 114, 1) 0%, rgb(216, 253, 218) 100%);
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  background: url(cards_bg.jpg);
+  color: #fff;
+  text-shadow: 0px 0px 20px #000;
 }
 
 h1 {
@@ -47,7 +48,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  align-content: center;
   text-align: center;
 }
 
@@ -67,7 +67,7 @@ h1 {
 }
 
 .final-statement {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-content: center;
   text-align: center;
@@ -75,7 +75,7 @@ h1 {
   justify-content: center;
 }
 
-.multi {
+.multiplayer-menu {
   display: flex;
   flex-direction: column;
   line-height: 57px;
@@ -88,7 +88,7 @@ h1 {
     color: #fff;
   }
   &::before {
-    background: rgba(4, 147, 114, 1);
+    background: #355394;
     transition: none;
   }
 }
@@ -97,7 +97,15 @@ h1 {
   display: none;
 }
 
+.special-word {
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #000,
+    0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000;
+}
+
 .horizontal {
+  text-shadow: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,9 +114,9 @@ h1 {
   height: 60px;
   margin: 20px;
   border: 5px solid var(--base-color);
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  background: rgba(4, 147, 114, 1);
+  background: #355394;
 
   > .text {
     position: relative;
