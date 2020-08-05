@@ -123,6 +123,7 @@ const checkPoints = (cardValue: string, howManyCards: number) => {
     changeVisibility("statements_container");
 
     const statement = document.getElementById("game_statement");
+    playSound('win_sound');
     statement.innerHTML = `You won with ${points} points`;
 
     disableHitAndStand();
@@ -134,6 +135,8 @@ const checkPoints = (cardValue: string, howManyCards: number) => {
 
     const statement = document.getElementById("game_statement");
     statement.innerHTML = `You lose with ${points} points.`;
+
+    playSound('lose_sound');
 
     // disableHitAndStand();
 
@@ -301,8 +304,10 @@ const checkWinner = () => {
 
     statement.innerHTML = `There is a tie between ${players.join(" ")}.`;
   } else if (sortedWinners.length === 1) {
+    playSound('win_sound');
     statement.innerHTML = `${sortedWinners[0][0]} has won with ${sortedWinners[0][1]} points!`;
   } else {
+    playSound('lose_sound');
     statement.innerHTML = `Everybody are losing.`;
   }
 };
@@ -323,10 +328,12 @@ const artificalIntelligence = () => {
     const statement = document.getElementById("game_statement");
 
     if (points < pointsOfAI && pointsOfAI <= 21) {
+      playSound('lose_sound');
       statement.innerHTML = `AI has won with ${pointsOfAI} points!`;
     } else if (points === pointsOfAI) {
       statement.innerHTML = `There is a tie with ${points} points!`;
     } else {
+      playSound('win_sound');
       statement.innerHTML = `You won with ${points} points`;
     }
   }
@@ -366,4 +373,9 @@ const checkAPI = () => {
     return;
   }
   return;
+}
+
+const playSound = (id: string) => {
+  const sound = <HTMLAudioElement>(document.getElementById(id));
+  sound.play(); 
 }
