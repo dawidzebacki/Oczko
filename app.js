@@ -23,6 +23,7 @@ let player = "Player 1";
 let numberOfPlayers;
 let gameType;
 let hiddenCardUrl;
+let loser = false;
 // fetch data from api
 function getData(url) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -78,7 +79,7 @@ function addImage(url, whichCards, hiddenCard) {
     const img = document.createElement("img");
     const cardsContainer = document.getElementById(whichCards);
     if (hiddenCard) {
-        img.src = "card.png";
+        img.src = "pics/card.png";
         img.id = "hidden_card";
     }
     else {
@@ -119,15 +120,16 @@ const checkPoints = (cardValue, howManyCards) => {
         changeVisibility("buttons_container");
         changeVisibility("statements_container");
         const statement = document.getElementById("game_statement");
-        statement.innerHTML = `You win with ${points} points`;
+        statement.innerHTML = `You won with ${points} points`;
         disableHitAndStand();
     }
     else if (points >= 22) {
         changeVisibility("final_statement");
         changeVisibility("game_statement");
+        loser = true;
         const statement = document.getElementById("game_statement");
         statement.innerHTML = `You lose with ${points} points.`;
-        disableHitAndStand();
+        // disableHitAndStand();
         if (gameType === "single") {
             changeVisibility("buttons_container");
             changeVisibility("statements_container");
@@ -137,6 +139,7 @@ const checkPoints = (cardValue, howManyCards) => {
             setTimeout(function () {
                 changeVisibility("final_statement");
                 changeVisibility("game_statement");
+                loser = false;
                 disableHitAndStand();
                 stand();
             }, 5000);
@@ -146,7 +149,9 @@ const checkPoints = (cardValue, howManyCards) => {
 // take more cards
 function hit(howManyCards, isAI, checkPointsOfAI) {
     return __awaiter(this, void 0, void 0, function* () {
-        disableHitAndStand();
+        if (isAI === false) {
+            disableHitAndStand();
+        }
         const cards = yield getData(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${howManyCards}`);
         for (let i = 0; i < howManyCards; i++) {
             if (isAI) {
@@ -169,9 +174,11 @@ function hit(howManyCards, isAI, checkPointsOfAI) {
         }
         if (checkPointsOfAI)
             artificalIntelligence();
-        setTimeout(function () {
-            disableHitAndStand();
-        }, 500);
+        if (loser === false && isAI === false) {
+            setTimeout(function () {
+                disableHitAndStand();
+            }, 800);
+        }
     });
 }
 const startSingleplayer = () => {
@@ -184,8 +191,11 @@ const startSingleplayer = () => {
     changeVisibility("hint_hand_player");
     changeVisibility("rules");
     gameType = "single";
+    checkAPI();
     hit(2, false, false);
-    hit(2, true, false);
+    setTimeout(function () {
+        hit(2, true, false);
+    }, 100);
 };
 const startMultiplayer = () => {
     changeVisibility("menu_multiplayer");
@@ -195,6 +205,7 @@ const startMultiplayer = () => {
     changeVisibility("now_playing");
     changeVisibility("rules");
     whoIsPlaying();
+    checkAPI();
     const numOfPlayers = (document.getElementById("number_of_players"));
     if (numOfPlayers.value === "") {
         numberOfPlayers = 2;
@@ -252,10 +263,10 @@ const checkWinner = () => {
         statement.innerHTML = `There is a tie between ${players.join(" ")}.`;
     }
     else if (sortedWinners.length === 1) {
-        statement.innerHTML = `${sortedWinners[0][0]} wins with ${sortedWinners[0][1]} points!`;
+        statement.innerHTML = `${sortedWinners[0][0]} has won with ${sortedWinners[0][1]} points!`;
     }
     else {
-        statement.innerHTML = `Everybody lose.`;
+        statement.innerHTML = `Everybody are losing.`;
     }
 };
 // AI behavior when player press STAND
@@ -272,19 +283,18 @@ const artificalIntelligence = () => {
         changeHiddenCard(hiddenCardUrl);
         const statement = document.getElementById("game_statement");
         if (points < pointsOfAI && pointsOfAI <= 21) {
-            statement.innerHTML = `AI wins with ${pointsOfAI} points!`;
+            statement.innerHTML = `AI has won with ${pointsOfAI} points!`;
         }
         else if (points === pointsOfAI) {
             statement.innerHTML = `There is a tie with ${points} points!`;
         }
         else {
-            statement.innerHTML = `Player wins with ${points} points`;
+            statement.innerHTML = `You won with ${points} points`;
         }
     }
 };
 // filter an input of number of players in multiplayer mode
 function setInputFilter(textbox, inputFilter) {
-    console.log(textbox, inputFilter);
     [
         "input",
         "keydown",
@@ -311,4 +321,12 @@ function setInputFilter(textbox, inputFilter) {
         });
     });
 }
+const checkAPI = () => {
+    if (deckId === undefined) {
+        const API = document.getElementById("api_problem");
+        API.classList.remove('no-visibility');
+        return;
+    }
+    return;
+};
 //# sourceMappingURL=app.js.map

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="icon" href="pics/icon.png">
     <title>Oczko</title>
   </head>
   <body>
@@ -59,8 +60,10 @@
       <div class="no-visibility" id="hint_hand_dealer">
         Dealer's hand is underneath
       </div>
-      <div class="cards-container no-visibility" id="cards_container_ai"></div>
-      <div class="cards-container no-visibility" id="cards_container"></div>
+      <div class="cards-container-ai no-visibility" id="cards_container_ai"></div>
+      <div class="cards-container no-visibility" id="cards_container">
+        <span class="no-visibility" id="api_problem">There is something wrong with the API. Try again later or text me <a href="mailto:dawidzebacki@gmail.com">here</a></span>
+      </div>
       <div class="no-visibility" id="hint_hand_player">Your hand is above</div>
 
       <div class="statements no-visibility" id="statements_container">
@@ -73,7 +76,7 @@
           id="hit_button"
           class="horizontal"
           type="button"
-          onclick="hit(1)"
+          onclick="hit(1, false, false)"
         >
           <span class="text">HIT</span>
         </button>
