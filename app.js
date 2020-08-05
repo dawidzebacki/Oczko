@@ -70,10 +70,6 @@ const whoIsPlaying = () => {
     const actualPlayer = document.getElementById("now_playing");
     actualPlayer.innerHTML = `Actually playing: ${player}`;
 };
-// go to main menu
-const reset = () => {
-    window.location.reload(true);
-};
 // show images of card to player's hand or AI hand.
 function addImage(url, whichCards, hiddenCard) {
     const img = document.createElement("img");
